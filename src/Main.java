@@ -3,6 +3,7 @@
 /* Ursprunglig författare: Viggo Kann KTH viggo@nada.kth.se      */
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
@@ -12,6 +13,7 @@ public class Main {
 
   public static List<String> readWordList(BufferedReader input) throws IOException {
     LinkedList<String> list = new LinkedList<String>();
+    input = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/src/ordlista.txt"));
     while (true) {
       String s = input.readLine();
       if (s.equals("#"))
@@ -22,7 +24,7 @@ public class Main {
   }
 
   public static void main(String args[]) throws IOException {
-    //    long t1 = System.currentTimeMillis();
+        //long t1 = System.currentTimeMillis();
 	System.out.println("Write Words that should be added to the dictionary:(end with '#')");
     BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 
@@ -39,8 +41,8 @@ public class Main {
       }
     
     
-    //    long tottime = (System.currentTimeMillis() - t1);
-    //    System.out.println("CPU time: " + tottime + " ms");
+        //long tottime = (System.currentTimeMillis() - t1);
+        //System.out.println("CPU time: " + tottime + " ms");
 
   }
 }
