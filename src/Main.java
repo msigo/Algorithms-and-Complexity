@@ -13,7 +13,8 @@ public class Main {
 
   public static List<String> readWordList(BufferedReader input) throws IOException {
     LinkedList<String> list = new LinkedList<String>();
-    input = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/src/ordlista.txt"));
+    //input = new BufferedReader(new InputStreamReader(new FileInputStream(System.getProperty("user.dir")+"/src/testmedordlista.in"),"UTF-8"));
+    input = new BufferedReader(new InputStreamReader(new FileInputStream(System.getProperty("user.dir")+"/src/dictionary.txt"),"UTF-8"));
     while (true) {
       String s = input.readLine();
       if (s.equals("#"))
@@ -24,25 +25,28 @@ public class Main {
   }
 
   public static void main(String args[]) throws IOException {
-        //long t1 = System.currentTimeMillis();
-	System.out.println("Write Words that should be added to the dictionary:(end with '#')");
+    //    long t1 = System.currentTimeMillis();
     BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+    //BufferedReader stdin = new BufferedReader(new InputStreamReader(new FileInputStream(System.getProperty("user.dir")+"/src/testmedordlista.ans"),"UTF-8"));
 
     // Säkrast att specificera att UTF-8 ska användas, för vissa system har annan
     // standardinställning för teckenkodningen.
-    List<String> wordList = readWordList(stdin);
+    //List<String> wordList = readWordList(stdin);
     String word;
-    System.out.println("Write a Word:");
-    while ((word = stdin.readLine()) != null) {
+    long t1=0;
+    if ((word = stdin.readLine()) != null) {
+        t1 = System.currentTimeMillis();
+      List<String> wordList = readWordList(stdin);
+
       ClosestWords closestWords = new ClosestWords(word, wordList);
       System.out.print(word + " (" + closestWords.getMinDistance() + ")");
       for (String w : closestWords.getClosestWords())
-        System.out.print(" " + w);
-      }
+        System.out.println(" " + w);
+ 
+    }
     
-    
-        //long tottime = (System.currentTimeMillis() - t1);
-        //System.out.println("CPU time: " + tottime + " ms");
+        long tottime = (System.currentTimeMillis() - t1);
+        System.out.println("CPU time: " + tottime + " ms");
 
   }
 }
